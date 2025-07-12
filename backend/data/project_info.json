@@ -1,0 +1,14 @@
+[
+    {
+        "proj_id": "P1",
+        "proj_name": "Project One",
+        "concept": 100,
+        "initial": 100,
+        "sprint": [0, 0, 0, 0, 0, 0],
+        "sprint_notes": "started work", 
+        "technology": "Python",
+        "business_function": "Finance",
+        "initiation_date": "2023-01-01",
+        "sprint_start": "2023-01-15"
+    }
+]

@@ -1,0 +1,9 @@
+[
+{
+        "proj_id": "P1",
+        "proj_name": "Project One",
+        "concept": 100,
+        "initial": 100, 
+        "sprint": [0, 0, 0, 0, 0, 0]
+    }
+]
