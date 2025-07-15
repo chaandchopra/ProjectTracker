@@ -3,22 +3,13 @@ import { ProgressBar, SprintProgressBar } from "./progressBar";
 // import ProjectInfo from "../routes/projectInfo";
 const sprint = [90, 0, 0, 0, 0, 0];
 
-interface projectBarProps {
-    proj_id: string;
-    proj_name: string;
-    conceptualize: number;
-}
 const projectStatusInfo = {
     "Label": { label: "Label", width: "w-[25%]", color: "blue-600" },
     "Conceptualize": { label: "Conceptualize", description: "Project concept, exploring feasibility", width: "w-[10%]", color: "blue-600" },
     "Initialize": { label: "Initialize", description: "Team formed, planning and initial design", width: "w-[10%]", color: "orange-400" },
     "Experiment": { label: "Experiment", description: "MVP development, iterative testing", width: "w-[60%]", color: "teal-400" },
 }
-const projectStatusInfo1 = {
-    "Conceptualize": { label: "Conceptualize", description: "Project concept, exploring feasibility", width: "w-[15%]", bgColor: "bg-blue-600" },
-    "Initialize": { label: "Initialize", description: "Team formed, planning and initial design", width: "w-[15%]", bgColor: "bg-orange-400" },
-    "Experiment": { label: "Experiment", description: "MVP development, iterative testing", width: "w-[70%]", bgColor: "bg-teal-400" },
-}
+
 export const ProjectBarFooter = () => {
 
     return (

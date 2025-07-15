@@ -4,7 +4,7 @@ import { ProjectDetailHeader, ProjectDetailsProgressBar, ProjectDetailsProjectIn
 import { useQuery } from '@tanstack/react-query';
 import { deleteProject, getProjectById, updateProject } from '../services/projectService';
 import  { EditModal } from '../components/EditModal';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { DeleteModal } from '../components/DeleteModal';
 
 export const projectLoader = async ({ params }) => {
@@ -52,7 +52,7 @@ const ProjectInfo = () => {
     }
     return (
         <div className='p-4'>
-            <ProjectDetailHeader setOpenDelete={setOpenDelete}/>
+            <ProjectDetailHeader setOpenDelete={setOpenDelete} />
             <ProjectDetailsProgressBar projectInfo={{ ...data.data, ...projectStatusInfo1 }} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsSprintNotes projectInfo={data.data} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsProjectInfo projectInfo={data.data} editOpen={setOpen} detailType={setType} />

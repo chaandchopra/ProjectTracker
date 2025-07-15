@@ -19,29 +19,10 @@
         "sprint_start": "2023-01-15"
     },
     {
-        "proj_id": "P3",
-        "proj_name": "Project Three",
-        "concept": 0,
-        "initial": 0,
-        "sprint": [
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-        ],
-        "sprint_notes": "",
-        "technology": "qqq",
-        "business_function": "www",
-        "initiation_date": "qqq",
-        "sprint_start": "qwq"
-    },
-    {
         "proj_id": "P4",
         "proj_name": "Project Four",
-        "concept": 0,
-        "initial": 0,
+        "concept": "100",
+        "initial": "40",
         "sprint": [
             0,
             0,
@@ -50,7 +31,7 @@
             0,
             0
         ],
-        "sprint_notes": "",
+        "sprint_notes": "Adding Sprint data from UI",
         "technology": "Tech",
         "business_function": "Business",
         "initiation_date": "2025-10-05",

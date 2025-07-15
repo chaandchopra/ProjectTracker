@@ -6,7 +6,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { Formik, Form, FormikHelpers, Field } from "formik";
+import { Formik, Form } from "formik";
 
 interface EditModalProps {
   open: boolean;
@@ -31,17 +31,17 @@ export const EditModal: React.FC<EditModalProps> = ({
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>Edit {type}</DialogTitle>
 
-      {type == "sprintNotes" ?
+      {type==="sprintNotes" ?
         <SprintNotesFormik
           onClose={onClose}
           onSave={onSave}
           initialData={initialData} /> : null}
-      {type == "projectInfo" ?
+      {type==="projectInfo" ?
         <ProjInfoFormik
           onClose={onClose}
           onSave={onSave}
           initialData={initialData} /> : null}
-      {type == "projectProgress" ?
+      {type==="projectProgress" ?
         <ProjProgressFormik
           onClose={onClose}
           onSave={onSave}
