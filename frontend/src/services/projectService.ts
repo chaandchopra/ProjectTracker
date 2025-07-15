@@ -1,6 +1,6 @@
 import apiClient from "../apiClient";
 
-export const getProjects = () => apiClient.get("/projects");
+export const getProjects = () => apiClient.get("/projects/");
 
 export const getProjectById = (id: string) => apiClient.get(`/projects/${id}`);
 

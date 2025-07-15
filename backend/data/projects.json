@@ -1,9 +1,16 @@
 [
-{
+    {
         "proj_id": "P1",
         "proj_name": "Project One",
         "concept": 100,
-        "initial": 100, 
-        "sprint": [0, 0, 0, 0, 0, 0]
+        "initial": 100,
+        "sprint": [ 100, 30, 0, 0, 0, 0 ]
+    },
+    {
+        "proj_id": "P2",
+        "proj_name": "Project Two",
+        "concept": 100,
+        "initial": 100,
+        "sprint": [ 100, 100, 90, 0, 0, 0 ]
     }
 ]

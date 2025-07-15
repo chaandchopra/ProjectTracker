@@ -7,7 +7,7 @@ class ProjectResponse(BaseModel):
     concept: int = 0
     initial: int = 0
     sprint: List[int]
-    strint_notes: Optional[str] = None
+    sprint_notes: Optional[str] = None
     technology: Optional[str] = None
     business_function: Optional[str] = None
     initiation_date: Optional[str] = None
