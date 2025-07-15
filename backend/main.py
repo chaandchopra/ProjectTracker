@@ -14,6 +14,6 @@ app.add_middleware(
 
 app.include_router(api.router, prefix="/api", tags=["Projects"])
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")

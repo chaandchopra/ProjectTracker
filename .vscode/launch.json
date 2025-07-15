@@ -5,6 +5,19 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Python Debugger: FastAPI",
+            "type": "debugpy",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:app",
+                "--reload"
+            ],
+            "jinja": true, 
+            // "webRoot": "${workspaceFolder}/backend"
+            "cwd": "${workspaceFolder}/backend"
+        },
+        {
             "type": "msedge",
             "request": "launch",
             "name": "Launch Edge against localhost",

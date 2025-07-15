@@ -4,7 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { ProjectBarOnly } from './projectBar';
 import { Link } from 'react-router-dom';
 
-export const ProjectDetailHeader = () => {
+export const ProjectDetailHeader = ({ setOpenDelete }) => {
     return (
         <div className="pb-4">
             <div className="flex items-center justify-between">
@@ -14,7 +14,7 @@ export const ProjectDetailHeader = () => {
                 </div>
                 <div className="flex gap-6">
                     <div className=" bg-green-500 text-white rounded-xl text-sm p-1 pr-2 pl-2 flex justify-center ">Experiment</div>
-                    <div className="text-red-500 text-xl"><DeleteOutlineIcon fontSize='inherit' /></div>
+                    <button onClick={()=>setOpenDelete(true)} className="text-red-500 text-xl"><DeleteOutlineIcon fontSize='inherit' /></button>
                 </div>
             </div>
             <hr />

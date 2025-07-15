@@ -7,13 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import { Formik, Form, FormikHelpers, Field } from "formik";
-import * as Yup from "yup";
 
-
-
-// Define the shape of the data being edited
-
-// Define component props
 interface EditModalProps {
   open: boolean;
   onClose: () => void;
@@ -171,7 +165,7 @@ const ProjProgressFormik = ({ onClose, onSave, initialData }) => {
               {values.sprint.map((val, index) => {
                 return (
                   <TextField
-                    label={`Sprint ${index+1}`}
+                    label={`Sprint ${index + 1}`}
                     name={`sprint[${index}]`}
                     value={val}
                     onChange={handleChange}

@@ -4,9 +4,9 @@ from pydantic import BaseModel
 class ProjectResponse(BaseModel):
     proj_id: str
     proj_name: str
-    concept: int = 0
-    initial: int = 0
-    sprint: List[int]
+    concept: int | str = 0
+    initial: int | str= 0
+    sprint: List[int| str]
     sprint_notes: Optional[str] = None
     technology: Optional[str] = None
     business_function: Optional[str] = None

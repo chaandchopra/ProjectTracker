@@ -1,10 +1,11 @@
 
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { ProjectDetailHeader, ProjectDetailsProgressBar, ProjectDetailsProjectInfo, ProjectDetailsSprintNotes } from '../components/projectDetails'
 import { useQuery } from '@tanstack/react-query';
-import { getProjectById } from '../services/projectService';
+import { deleteProject, getProjectById, updateProject } from '../services/projectService';
 import  { EditModal } from '../components/EditModal';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { DeleteModal } from '../components/DeleteModal';
 
 export const projectLoader = async ({ params }) => {
     const { id } = params;
@@ -23,13 +24,35 @@ const ProjectInfo = () => {
         queryFn: () => getProjectById(projectId),
     });
     const [open, setOpen] = useState(false);
+    const [openDelete, setOpenDelete] = useState(false);
     const [type, setType] = useState("");
+    const navigate = useNavigate();
 
     if (isLoading) return (<p>Loading...</p>);
     if (error) return (<p>Error fetching projects {error.message}</p>);
+    
+    const onSave = (updated) => {
+        try {
+            updateProject(updated);
+            data.data = updated;
+            alert("Project updated successfully!");
+          } catch (error) {
+            console.error("Error updating project:", error);
+          }
+    }
+    const onDelete = async (updated) => {
+        try {
+            await deleteProject(updated);
+            data.data = updated;
+            navigate("/");
+            alert("Project updated successfully!");
+          } catch (error) {
+            console.error("Error updating project:", error);
+          }
+    }
     return (
         <div className='p-4'>
-            <ProjectDetailHeader />
+            <ProjectDetailHeader setOpenDelete={setOpenDelete}/>
             <ProjectDetailsProgressBar projectInfo={{ ...data.data, ...projectStatusInfo1 }} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsSprintNotes projectInfo={data.data} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsProjectInfo projectInfo={data.data} editOpen={setOpen} detailType={setType} />
@@ -37,8 +60,14 @@ const ProjectInfo = () => {
                 open={open}
                 onClose={() => setOpen(false)}
                 initialData={data.data}
-                onSave={(updated) => {data.data=updated}}
+                onSave={(updated) => {onSave(updated)}}
                 type={type}
+            />
+            <DeleteModal
+                open={openDelete}
+                projId={data.data.proj_id}
+                onClose={() => setOpenDelete(false)}
+                onConfirm={(projId) => {onDelete(projId)}}
             />
         </div>
     );
