@@ -35,14 +35,14 @@ export const Legend = () => {
     )
 }
 
-export const ProjectHomeHeader = () => {
+export const ProjectHomeHeader = ({ openAddProject }) => {
     return (
         <div className="pb-4">
             <div className="flex items-center justify-between">
                 <div className="text-lg font-bold mb-2">
                     Projects Pipeline
                 </div>
-                <button className="ml-auto bg-blue-600 text-white my-2 rounded-full w-8 h-8 flex items-center justify-center m-1 ">+</button>
+                <button className="ml-auto bg-blue-600 text-white my-2 rounded-full w-8 h-8 flex items-center justify-center m-1 " onClick={() => openAddProject(true)}>+</button>
             </div>
             <hr />
         </div>
