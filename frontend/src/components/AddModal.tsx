@@ -37,7 +37,7 @@ const AddProjectFormik = ({ onClose, onSave, initialData }) => {
         initialValues={initialData}
         onSubmit={(values) => {
           onSave(values);
-          onClose();
+          // onClose();
         }}
       >
         {({

@@ -9,6 +9,11 @@ export const updateProject = ( data: any ) => {
     return response;
 };
 
+export const createProject = ( data: any ) => {
+    const response = apiClient.post(`/projects/`, data);
+    return response;
+}
+
 export const deleteProject = (id: string) => {
     const response = apiClient.delete(`/projects/${id}`);
     return response;
