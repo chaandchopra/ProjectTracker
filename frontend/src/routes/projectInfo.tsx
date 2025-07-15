@@ -3,6 +3,8 @@ import { useLoaderData } from 'react-router-dom';
 import { ProjectDetailHeader, ProjectDetailsProgressBar, ProjectDetailsProjectInfo, ProjectDetailsSprintNotes } from '../components/projectDetails'
 import { useQuery } from '@tanstack/react-query';
 import { getProjectById } from '../services/projectService';
+import  { EditModal } from '../components/EditModal';
+import { useMemo, useState } from 'react';
 
 export const projectLoader = async ({ params }) => {
     const { id } = params;
@@ -20,16 +22,24 @@ const ProjectInfo = () => {
         queryKey: [`projects/${projectId}`],
         queryFn: () => getProjectById(projectId),
     });
+    const [open, setOpen] = useState(false);
+    const [type, setType] = useState("");
 
     if (isLoading) return (<p>Loading...</p>);
     if (error) return (<p>Error fetching projects {error.message}</p>);
     return (
         <div className='p-4'>
-            {JSON.stringify(data, null, 5)}
             <ProjectDetailHeader />
-            <ProjectDetailsProgressBar projectInfo={{...data.data, ...projectStatusInfo1}}/>
-            <ProjectDetailsSprintNotes projectInfo={data.data}/>
-            <ProjectDetailsProjectInfo />
+            <ProjectDetailsProgressBar projectInfo={{ ...data.data, ...projectStatusInfo1 }} editOpen={setOpen} detailType={setType}/>
+            <ProjectDetailsSprintNotes projectInfo={data.data} editOpen={setOpen} detailType={setType}/>
+            <ProjectDetailsProjectInfo projectInfo={data.data} editOpen={setOpen} detailType={setType} />
+            <EditModal
+                open={open}
+                onClose={() => setOpen(false)}
+                initialData={data.data}
+                onSave={(updated) => {data.data=updated}}
+                type={type}
+            />
         </div>
     );
 }
