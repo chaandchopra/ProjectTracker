@@ -109,6 +109,7 @@ export const ProjectBarOnly = ({ projectInfo }) => {
     return (
         <>
             <div className="w-full h-16">
+                {/* {JSON.stringify(projectInfo, null, 3)} */}
                 <div className="flex items-center justify-between p-2">
                     <div className={` w-[20%] pl-1 pr-1`}>
                         <ProgressBar percent={projectInfo["concept"]} color={projectInfo.Conceptualize.bgColor} />

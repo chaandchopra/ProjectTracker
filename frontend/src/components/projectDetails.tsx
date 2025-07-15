@@ -2,13 +2,14 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import Paper from '@mui/material/Paper';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { ProjectBarOnly } from './projectBar';
+import { Link } from 'react-router-dom';
 
 export const ProjectDetailHeader = () => {
     return (
         <div className="pb-4">
             <div className="flex items-center justify-between">
                 <div className="text-lg font-bold flex gap-4 mb-2">
-                    <div className=" bg-black text-white rounded-md text-sm p-1 pr-2 pl-2">Back</div>
+                    <Link to="/"><div className=" bg-black text-white rounded-md text-sm p-1 pr-2 pl-2">Back</div></Link>
                     Projects Pipeline
                 </div>
                 <div className="flex gap-6">
@@ -20,6 +21,7 @@ export const ProjectDetailHeader = () => {
         </div>
     )
 }
+
 const PaperHeader = ({ header, editOpen, setDetailType, detailType}) => {
     return (
         <div>

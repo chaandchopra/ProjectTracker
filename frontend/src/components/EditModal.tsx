@@ -6,7 +6,7 @@ import {
   Button,
   TextField,
 } from "@mui/material";
-import { Formik, Form, FormikHelpers } from "formik";
+import { Formik, Form, FormikHelpers, Field } from "formik";
 import * as Yup from "yup";
 
 
@@ -37,36 +37,38 @@ export const EditModal: React.FC<EditModalProps> = ({
     <Dialog open={open} onClose={onClose} fullWidth maxWidth="sm">
       <DialogTitle>Edit {type}</DialogTitle>
 
-      {type=="sprintNotes"?
-      <SprintNotesFormik 
-        onClose={onClose} 
-        onSave={onSave}
-        initialData={initialData} />: null }
-      {type=="projectInfo"?
-      <ProjInfoFormik 
-        onClose={onClose} 
-        onSave={onSave}
-        initialData={initialData} />: null }
-      {type=="projectProgress"?
-      <ProjProgressFormik 
-        onClose={onClose} 
-        onSave={onSave}
-        initialData={initialData} />: null }
+      {type == "sprintNotes" ?
+        <SprintNotesFormik
+          onClose={onClose}
+          onSave={onSave}
+          initialData={initialData} /> : null}
+      {type == "projectInfo" ?
+        <ProjInfoFormik
+          onClose={onClose}
+          onSave={onSave}
+          initialData={initialData} /> : null}
+      {type == "projectProgress" ?
+        <ProjProgressFormik
+          onClose={onClose}
+          onSave={onSave}
+          initialData={initialData} /> : null}
     </Dialog>
   );
 };
 
-const ProjInfoFormik =({ onClose, onSave, initialData }) => {
+const ProjInfoFormik = ({ onClose, onSave, initialData }) => {
   return (
-     <>
+    <>
       <Formik
         initialValues={initialData}
         onSubmit={(values) => {
-          const updated = { ...initialData, 
-                            technology: values.technology, 
-                            business_function: values.business_function, 
-                            initiation_date: values.initiation_date, 
-                            sprint_start: values.sprint_start}; // Merge updated field
+          const updated = {
+            ...initialData,
+            technology: values.technology,
+            business_function: values.business_function,
+            initiation_date: values.initiation_date,
+            sprint_start: values.sprint_start
+          }; // Merge updated field
           onSave(updated);
           onClose();
         }}
@@ -123,21 +125,22 @@ const ProjInfoFormik =({ onClose, onSave, initialData }) => {
           </Form>
         )}
       </Formik>
-    </>   
+    </>
   )
 }
 
 const ProjProgressFormik = ({ onClose, onSave, initialData }) => {
-  return(
+  return (
     <>
       <Formik
         initialValues={initialData}
         onSubmit={(values) => {
-          const updated = { ...initialData, 
-                            technology: values.technology, 
-                            business_function: values.business_function, 
-                            initiation_date: values.initiation_date, 
-                            sprint_start: values.sprint_start}; // Merge updated field
+          const updated = {
+            ...initialData,
+            concept: values.concept,
+            initial: values.initial,
+            sprint: values.sprint
+          }; // Merge updated field
           onSave(updated);
           onClose();
         }}
@@ -147,40 +150,35 @@ const ProjProgressFormik = ({ onClose, onSave, initialData }) => {
           handleChange,
           isSubmitting,
         }) => (
-          <Form>
+          <Form>map
             <DialogContent className="flex flex-col gap-4">
               <TextField
-                label="sprint 1"
-                name="strint 1"
-                value={values.sprint[0]}
+                label={"Conceptualize"}
+                name="concept"
+                value={values.concept}
                 onChange={handleChange}
                 fullWidth
                 multiline
               />
               <TextField
-                label="Business Function"
-                name="business_function"
-                value={values.business_function}
+                label={"Initialize"}
+                name={"initial"}
+                value={values.initial}
                 onChange={handleChange}
                 fullWidth
                 multiline
               />
-              <TextField
-                label="Initiation Date"
-                name="initiation_date"
-                value={values.initiation_date}
-                onChange={handleChange}
-                fullWidth
-                multiline
-              />
-              <TextField
-                label="Sprint Start"
-                name="sprint_start"
-                value={values.sprint_start}
-                onChange={handleChange}
-                fullWidth
-                multiline
-              />
+              {values.sprint.map((val, index) => {
+                return (
+                  <TextField
+                    label={`Sprint ${index+1}`}
+                    name={`sprint[${index}]`}
+                    value={val}
+                    onChange={handleChange}
+                    fullWidth
+                    multiline
+                  />)
+              })}
             </DialogContent>
 
             <DialogActions>
@@ -193,7 +191,7 @@ const ProjProgressFormik = ({ onClose, onSave, initialData }) => {
             </DialogActions>
           </Form>
         )}
-      </Formik>    
+      </Formik>
     </>
   )
 }
