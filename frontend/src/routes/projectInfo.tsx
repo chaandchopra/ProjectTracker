@@ -56,7 +56,7 @@ const ProjectInfo = () => {
     }
     return (
         <div className='p-4'>
-            <ProjectDetailHeader setOpenDelete={setOpenDelete} />
+            <ProjectDetailHeader setOpenDelete={setOpenDelete} projectInfo={data.data}/>
             <ProjectDetailsProgressBar projectInfo={{ ...data.data, ...projectStatusInfo1 }} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsSprintNotes projectInfo={data.data} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsProjectInfo projectInfo={data.data} editOpen={setOpen} detailType={setType} />

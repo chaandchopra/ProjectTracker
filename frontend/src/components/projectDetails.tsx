@@ -4,13 +4,13 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { ProjectBarOnly } from './projectBar';
 import { Link } from 'react-router-dom';
 
-export const ProjectDetailHeader = ({ setOpenDelete }) => {
+export const ProjectDetailHeader = ({ setOpenDelete, projectInfo }) => {
     return (
         <div className="pb-4">
             <div className="flex items-center justify-between">
                 <div className="text-lg font-bold flex gap-4 mb-2">
                     <Link to="/"><div className=" bg-black text-white rounded-md text-sm p-1 pr-2 pl-2">Back</div></Link>
-                    Projects Pipeline
+                    {projectInfo.proj_id}.{projectInfo.proj_name}
                 </div>
                 <div className="flex gap-6">
                     <div className=" bg-green-500 text-white rounded-xl text-sm p-1 pr-2 pl-2 flex justify-center ">Experiment</div>
