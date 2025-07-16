@@ -83,13 +83,13 @@ export const ProjectBarOnly = ({ projectInfo }) => {
             <div className="w-full h-16">
                 {/* {JSON.stringify(projectInfo, null, 3)} */}
                 <div className="flex items-center justify-between p-2">
-                    <div className={` w-[20%] pl-1 pr-1`}>
+                    <div className={`${projectInfo.Conceptualize.widthSolo} pl-1 pr-1`}>
                         <ProgressBar percent={projectInfo["concept"]} color={projectInfo.Conceptualize.bgColor} />
                     </div>
-                    <div className={` w-[20%] pl-1 pr-1`}>
+                    <div className={`${projectInfo.Initialize.widthSolo} pl-1 pr-1`}>
                         <ProgressBar percent={projectInfo["initial"]} color={projectInfo.Initialize.bgColor} />
                     </div>
-                    <div className={` w-[60%] h-8 flex pl-1 pr-1`}>
+                    <div className={`${projectInfo.Experiment.widthSolo} h-8 flex pl-1 pr-1`}>
                         {projectInfo["sprint"].map((item, idx) => {
                             const last = sprint.length - 1;
                             return (<SprintProgressBar percent={item} color={projectInfo.Experiment.bgColor} index={idx} last={last} />)
@@ -98,18 +98,18 @@ export const ProjectBarOnly = ({ projectInfo }) => {
                     </div>
                 </div>
             </div>
-            <div className="w-full h-8">
+            <div className="w-full h-5">
                 <div className="flex items-center justify-between">
-                    <div className={` w-[20%] pl-2 pr-2`}>
-                        <div className="w-full flex justify-center items-center text-[12px]">Concept</div>
+                    <div className={`${projectInfo.Conceptualize.widthSolo} pl-2 pr-2`}>
+                        <div className={`w-full ${centerMe} text-[12px] font-semibold ${projectInfo.Conceptualize.textColor}`}>Conceptualize</div>
                     </div>
-                    <div className={` w-[20%] pl-2 pr-2`}>
-                        <div className="w-full flex justify-center items-center text-[12px]">Initial</div>
+                    <div className={`${projectInfo.Initialize.widthSolo} pl-2 pr-2`}>
+                        <div className={`w-full ${centerMe} font-semibold text-[12px] ${projectInfo.Initialize.textColor}`}>Initialize</div>
                     </div>
-                    <div className={` w-[60%] h-8 flex pl-2 pr-2`}>
+                    <div className={` ${projectInfo.Experiment.widthSolo} h-5 flex pl-2 pr-2`}>
                         {projectInfo["sprint"].map((item, idx) => {
 
-                            return (<div className="w-full flex justify-center items-center text-[12px]">Sprint {idx + 1}</div>)
+                            return (<div className={`w-full ${centerMe} font-semibold text-[12px] ${projectInfo.Experiment.textColor}`}>Sprint {idx + 1}</div>)
                         })
                         }
                     </div>

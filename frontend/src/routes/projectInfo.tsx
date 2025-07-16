@@ -6,15 +6,11 @@ import { deleteProject, getProjectById, updateProject } from '../services/projec
 import  { EditModal } from '../components/EditModal';
 import { useState } from 'react';
 import { DeleteModal } from '../components/DeleteModal';
+import { projMetaData } from '../utils/constants';
 
 export const projectLoader = async ({ params }) => {
     const { id } = params;
     return id;
-}
-const projectStatusInfo1 = {
-    "Conceptualize": { label: "Conceptualize", description: "Project concept, exploring feasibility", width: "w-[15%s", bgColor: "bg-blue-600" },
-    "Initialize": { label: "Initialize", description: "Team formed, planning and initial design", width: "w-[15%]", bgColor: "bg-orange-400" },
-    "Experiment": { label: "Experiment", description: "MVP development, iterative testing", width: "w-[70%]", bgColor: "bg-teal-400" },
 }
 
 const ProjectInfo = () => {
@@ -57,7 +53,7 @@ const ProjectInfo = () => {
     return (
         <div className='p-4'>
             <ProjectDetailHeader setOpenDelete={setOpenDelete} projectInfo={data.data}/>
-            <ProjectDetailsProgressBar projectInfo={{ ...data.data, ...projectStatusInfo1 }} editOpen={setOpen} detailType={setType}/>
+            <ProjectDetailsProgressBar projectInfo={{ ...data.data, ...projMetaData }} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsSprintNotes projectInfo={data.data} editOpen={setOpen} detailType={setType}/>
             <ProjectDetailsProjectInfo projectInfo={data.data} editOpen={setOpen} detailType={setType} />
             <EditModal
