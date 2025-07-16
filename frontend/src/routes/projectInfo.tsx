@@ -49,7 +49,6 @@ const ProjectInfo = () => {
                 if (!oldData) return [];
                 return { ...oldData, data:  updated.data }; 
             });
-            alert("Project updated successfully!!!");
             navigate("/")
             alert("Project is deleted !!")
         },
