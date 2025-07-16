@@ -1,33 +1,21 @@
 import { Paper } from "@mui/material";
 import { ProgressBar, SprintProgressBar } from "./progressBar";
+import { centerMe, projMetaData } from "../utils/constants";
 // import ProjectInfo from "../routes/projectInfo";
 const sprint = [90, 0, 0, 0, 0, 0];
 
-const projectStatusInfo = {
-    "Label": { label: "Label", width: "w-[25%]", color: "blue-600" },
-    "Conceptualize": { label: "Conceptualize", description: "Project concept, exploring feasibility", width: "w-[10%]", color: "blue-600" },
-    "Initialize": { label: "Initialize", description: "Team formed, planning and initial design", width: "w-[10%]", color: "orange-400" },
-    "Experiment": { label: "Experiment", description: "MVP development, iterative testing", width: "w-[60%]", color: "teal-400" },
-}
-
 export const ProjectBarFooter = () => {
-
+    const labels = ["Label", "Conceptualize", "Initialize", "Experiment"]
     return (
         <div className="w-full h-8">
-            {/* {JSON.stringify(projectInfo,null, 3)} */}
-            <div className="flex items-center justify-between p-2">
-                <div className={`${projectStatusInfo["Label"].width} pl-2 pl-2 text-sm`}> </div>
-                <div className={`${projectStatusInfo["Conceptualize"].width} pl-2 pr-2`}>
-                    Conceptualize
-                </div>
-                <div className={`${projectStatusInfo["Initialize"].width} pl-2 pr-2`}>
-                    Initialize
-                </div>
-                <div className={`${projectStatusInfo["Experiment"].width} h-4 flex pl-2 pr-2`}>
-                    <div className="w-full flex justify-center items-center text-[12px]">
-                        Experiments
+            <div className=" flex items-center justify-between p-2">
+                {labels.map(label => (
+                    <div className={`${projMetaData[label].width} h-4 flex pl-2 pr-2`}>
+                        <div className={`w-full flex font-semibold justify-center items-center text-[12px] ${projMetaData[label].textColor}`}>
+                            {projMetaData[label].isFooter ? projMetaData[label].label : null}
+                        </div>
                     </div>
-                </div>
+                ))}
             </div>
         </div>
     );
@@ -36,26 +24,20 @@ export const ProjectBarFooter = () => {
 
 export const ProjectBarHeader = ({ sprint }) => {
 
+    const labels = ["Label", "Conceptualize", "Initialize"]
     return (
         <div className="w-full h-8">
             {/* {JSON.stringify(projectInfo,null, 3)} */}
             <div className="flex items-center justify-between p-2">
-                <div className={`${projectStatusInfo["Label"].width} pl-2 pl-2 text-sm`}>
-
-                </div>
-                <div className={`${projectStatusInfo["Conceptualize"].width} pl-2 pr-2`}>
-                    {/* <ProgressBar percent={projectInfo["concept"]} color={projectInfo.Conceptualize.color} /> */}
-                </div>
-                <div className={`${projectStatusInfo["Initialize"].width} pl-2 pr-2`}>
-                    {/* <ProgressBar percent={projectInfo["initial"]} color={projectInfo.Initialize.color} /> */}
-                </div>
-                <div className={`${projectStatusInfo["Experiment"].width} h-4 flex pl-2 pr-2`}>
+                {labels.map(label => (
+                    <div className={`${projMetaData[label].width} pl-2 pl-2 text-sm`}>
+                    </div>
+                ))}
+                <div className={`${projMetaData["Experiment"].width} h-4 flex pl-2 pr-2`}>
                     {sprint.map((item, idx) => {
-                        // const last = sprint.length - 1;
                         return (
-                            <div className="w-full flex justify-center items-center text-[12px]">
+                            <div className={`w-full ${centerMe} text-[10px]`}>
                                 Sprint {idx + 1}
-                                {/* <SprintProgressBar percent={item} color={projectInfo.Experiment.color} index={idx}  last ={last}/> */}
                             </div>
                         )
                     })
@@ -69,18 +51,17 @@ export const ProjectBarHeader = ({ sprint }) => {
 export const ProjectBar = ({ projectInfo }) => {
     return (
         <div className="w-full h-16">
-            {/* {JSON.stringify(projectInfo,null, 3)} */}
-            <Paper elevation={3} className="flex items-center justify-between p-2">
-                <div className={`${projectStatusInfo["Label"].width} pl-2 pl-2 text-sm`}>
+            <Paper elevation={1} className="flex items-center justify-between p-2">
+                <div className={`${projMetaData["Label"].width} pl-2 pl-2 text-sm`}>
                     {projectInfo.proj_id}. {projectInfo.proj_name}
                 </div>
-                <div className={`${projectStatusInfo["Conceptualize"].width} pl-2 pr-2`}>
+                <div className={`${projMetaData["Conceptualize"].width} pl-2 pr-2`}>
                     <ProgressBar percent={projectInfo["concept"]} color={projectInfo.Conceptualize.bgColor} />
                 </div>
-                <div className={`${projectStatusInfo["Initialize"].width} pl-2 pr-2`}>
+                <div className={`${projMetaData["Initialize"].width} pl-2 pr-2`}>
                     <ProgressBar percent={projectInfo["initial"]} color={projectInfo.Initialize.bgColor} />
                 </div>
-                <div className={`${projectStatusInfo["Experiment"].width} h-8 flex pl-2 pr-2`}>
+                <div className={`${projMetaData["Experiment"].width} flex pl-2 pr-2`}>
                     {projectInfo["sprint"].map((item, idx) => {
                         const last = sprint.length - 1;
                         return (
@@ -111,7 +92,7 @@ export const ProjectBarOnly = ({ projectInfo }) => {
                     <div className={` w-[60%] h-8 flex pl-1 pr-1`}>
                         {projectInfo["sprint"].map((item, idx) => {
                             const last = sprint.length - 1;
-                            return ( <SprintProgressBar percent={item} color={projectInfo.Experiment.bgColor} index={idx} last={last} />)
+                            return (<SprintProgressBar percent={item} color={projectInfo.Experiment.bgColor} index={idx} last={last} />)
                         })
                         }
                     </div>
@@ -128,7 +109,7 @@ export const ProjectBarOnly = ({ projectInfo }) => {
                     <div className={` w-[60%] h-8 flex pl-2 pr-2`}>
                         {projectInfo["sprint"].map((item, idx) => {
 
-                            return(<div className="w-full flex justify-center items-center text-[12px]">Sprint {idx+1}</div>)
+                            return (<div className="w-full flex justify-center items-center text-[12px]">Sprint {idx + 1}</div>)
                         })
                         }
                     </div>

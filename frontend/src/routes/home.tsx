@@ -6,7 +6,7 @@ const Home = () => {
     const [openAddProj, setOpenAddProj] = useState(false);
 
     return (
-        <div className="p-4">
+        <div className="p-4 bg-gray-50">
             <ProjectHomeHeader openAddProject={setOpenAddProj} />
             <Legend />
             <ProjectList openAddProj={openAddProj} setOpenAddProj={setOpenAddProj}/>

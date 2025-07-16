@@ -59,14 +59,14 @@
     {
         "proj_id": "pp",
         "proj_name": "pp",
-        "concept": 0,
-        "initial": 0,
+        "concept": "100",
+        "initial": "100",
         "sprint": [
-            0,
-            0,
-            0,
-            0,
-            0,
+            "100",
+            "100",
+            "100",
+            "60",
+            "30",
             0
         ],
         "sprint_notes": "",
