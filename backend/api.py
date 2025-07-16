@@ -28,7 +28,8 @@ def update_project(service: ProjectServiceInterface = Depends(get_project_servic
     return service.update_project( project_data )
 
 
-@router.post("/projects/", response_model=List[ProjectResponse|None])
+@router.post("/projects/", response_model=bool)
 def create_project(service: ProjectServiceInterface = Depends(get_project_service), 
                     project_data: ProjectResponse = None):
-    return service.create_project( project_data )
+    value = service.create_project( project_data )
+    return value

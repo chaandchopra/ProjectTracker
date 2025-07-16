@@ -1,9 +1,12 @@
-import { useQuery } from '@tanstack/react-query';
-import { getProjects } from '../services/projectService';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { createProject, getProjects } from '../services/projectService';
 import { Paper } from '@mui/material';
 import Brightness1Icon from '@mui/icons-material/Brightness1';
 import { ProjectBar, ProjectBarFooter, ProjectBarHeader } from './projectBar';
 import { Link } from 'react-router-dom';
+import { AddModal } from './AddModal';
+import { useState } from 'react';
+import { initialForm } from '../utils/constants';
 
 const status = [
     { label: "Conceptualize", description: "Project concept, exploring feasibility", legendColor: "text-blue-600" },
@@ -19,6 +22,7 @@ const projectStatusInfo = {
 }
 
 export const Legend = () => {
+
     return (
         <div>
             <Paper elevation={2} className="p-2">
@@ -51,27 +55,48 @@ export const ProjectHomeHeader = ({ openAddProject }) => {
 
 
 
-export const ProjectList = () => {
+export const ProjectList = ({
+    openAddProj,
+    setOpenAddProj }
+) => {
     const { data, isLoading, error } = useQuery({
         queryKey: ['projects'],
         queryFn: () => getProjects(),
     });
-
+    const queryClient = useQueryClient();
     if (isLoading) return (<p>Loading...</p>);
     if (error) return (<p>Error fetching projects {error.message}</p>);
 
+    const addProj = async (updated) => {
+        try {
+            await createProject(updated);
+            queryClient.setQueryData(['projects'], (oldData:[]) => {
+                if (!oldData) return [];
+                return { ...oldData, data: [...data.data, updated] }; 
+            });
+            alert("Project created successfully! Refresh Page to see the updates...");
+        } catch (error) {
+            console.error("Error updating project:", error);
+        }
+    }
     return (
         <>
             <ProjectBarHeader sprint={data?.data[0].sprint} />
             {data?.data?.map((project) => (
                 <>
                     <Link to={`/project/${project.proj_id}`}> <ProjectBar projectInfo={{ ...project, ...projectStatusInfo }} />
-                </Link>
+                    </Link>
                 </>
             ))}
             <div className="fixed bottom-0 left-0 w-full bg-white">
                 <ProjectBarFooter />
             </div>
+            <AddModal
+                open={openAddProj}
+                onClose={() => setOpenAddProj(false)}
+                initialData={initialForm}
+                onSave={(updated) => { addProj(updated) }}
+            />
         </>
     );
 }

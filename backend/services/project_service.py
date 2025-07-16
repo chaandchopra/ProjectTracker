@@ -46,11 +46,11 @@ class ProjectService(ProjectServiceInterface):
         proj_list = self._read_json(DATA_FILE)
         return [ProjectResponse(**proj) for proj in proj_list]
     
-    def create_project(self, data:ProjectResponse) -> List[ProjectResponse]:
+    def create_project(self, data:ProjectResponse) -> bool:
         proj_list = self._read_json(DATA_FILE)
         if data.proj_id in [proj["proj_id"] for proj in proj_list]:
             raise HTTPException(status_code=404, detail="Project not found")
         proj_list.append(dict(data))
         with open(DATA_FILE, "w") as f:
             json.dump(proj_list, f, indent=4)
-        return proj_list
+        return True

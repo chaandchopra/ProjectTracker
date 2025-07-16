@@ -1,7 +1,7 @@
 
 import { useLoaderData, useNavigate } from 'react-router-dom';
 import { ProjectDetailHeader, ProjectDetailsProgressBar, ProjectDetailsProjectInfo, ProjectDetailsSprintNotes } from '../components/projectDetails'
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { deleteProject, getProjectById, updateProject } from '../services/projectService';
 import  { EditModal } from '../components/EditModal';
 import { useState } from 'react';
@@ -19,6 +19,7 @@ const projectStatusInfo1 = {
 
 const ProjectInfo = () => {
     const projectId = useLoaderData();
+    const queryClient = useQueryClient();
     const { data, isLoading, error } = useQuery({
         queryKey: [`projects/${projectId}`],
         queryFn: () => getProjectById(projectId),
@@ -31,10 +32,13 @@ const ProjectInfo = () => {
     if (isLoading) return (<p>Loading...</p>);
     if (error) return (<p>Error fetching projects {error.message}</p>);
     
-    const onSave = (updated) => {
+    const onSave = async (updated) => {
         try {
-            updateProject(updated);
-            data.data = updated;
+            await updateProject(updated);
+            queryClient.setQueryData([`projects/${projectId}`], (oldData:[]) => {
+                if (!oldData) return [];
+                return { ...oldData, data:  updated }; 
+            });
             alert("Project updated successfully!");
           } catch (error) {
             console.error("Error updating project:", error);
