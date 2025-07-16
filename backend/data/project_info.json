@@ -36,43 +36,5 @@
         "business_function": "Business",
         "initiation_date": "2025-10-05",
         "sprint_start": "2025-10-09"
-    },
-    {
-        "proj_id": "P0",
-        "proj_name": "ui",
-        "concept": "100",
-        "initial": "100",
-        "sprint": [
-            "90",
-            0,
-            0,
-            0,
-            0,
-            0
-        ],
-        "sprint_notes": "New Notesss yahhh",
-        "technology": "Python",
-        "business_function": "Medicine",
-        "initiation_date": "2025-10-09",
-        "sprint_start": "2025-09-10"
-    },
-    {
-        "proj_id": "pp",
-        "proj_name": "pp",
-        "concept": "100",
-        "initial": "100",
-        "sprint": [
-            "100",
-            "100",
-            "100",
-            "0",
-            "0",
-            0
-        ],
-        "sprint_notes": "",
-        "technology": "",
-        "business_function": "",
-        "initiation_date": "",
-        "sprint_start": ""
     }
 ]
