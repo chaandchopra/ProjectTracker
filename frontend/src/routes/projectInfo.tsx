@@ -42,33 +42,19 @@ const ProjectInfo = () => {
         }
     })
 
-    // const deleteMutation = useMutation({
-    //     mutationFn: deleteProject,
-    //     onSuccess: (updated) => {
-    //         queryClient.setQueryData([`projects/${projectId}`], (oldData:[]) => {
-    //             if (!oldData) return [];
-    //             return { ...oldData, data:  updated.data }; 
-    //         });
-    //         navigate("/");
-    //     },
-    //     onError: (err) => {
-    //         alert("Err deleting project");
-    //         console.log(err);
-    //     }
-    // })
+    const deleteMutation = useMutation({
+        mutationFn: deleteProject,
+        onSuccess: (updated) => {
+            navigate("/");
+        },
+        onError: (err) => {
+            alert("Err deleting project");
+            console.log(err);
+        }
+    })
 
     const onSave = (updated: any) => updateMutation.mutate(updated);
-    const onDelete = async (updated) => {
-        try {
-            await deleteProject(updated);
-            data.data = updated;
-            navigate("/");
-            alert("Project updated successfully!");
-        } catch (error) {
-            console.error("Error updating project:", error);
-        }
-    }
-    // const onDelete = (updated: any) => deleteMutation.mutate(updated);
+    const onDelete = (updated: any) => { deleteMutation.mutate(updated) };
 
     if (isLoading) return (<p>Loading...</p>);
     if (error) return (<p>Error fetching projects {error.message}</p>);
@@ -83,14 +69,14 @@ const ProjectInfo = () => {
                 open={open}
                 onClose={() => setOpen(false)}
                 initialData={data.data}
-                onSave={(updated) => { onSave(updated) }}
+                onSave={(updated) =>  onSave(updated) }
                 type={type}
             />
             <DeleteModal
                 open={openDelete}
                 projId={data.data.proj_id}
                 onClose={() => setOpenDelete(false)}
-                onConfirm={(projId) => { onDelete(projId) }}
+                onConfirm={(projId) => onDelete(projId)}
             />
         </div>
     );
